@@ -1,22 +1,20 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-void reverse(vector<int> &v, int a, int b)
+void remove_even(vector<int> &v, int a, int b)
 {
     // write your code only in this function
     int count = 0;
-    std::vector<int> temp(v);
     for (size_t i = a; i <= b; i++)
     {
-        if (i <= (a+b)/2)
+        if (i%2 == 0)
         {
-            v[i] = temp[b-(i-a)];
+            v.erase(v.begin()+i-count);
+            count++;
         }else {
-            v[i] = temp[b-count];
+            continue;
         }
-        count++;
     }
-    
 }
 int main()
 {
@@ -32,10 +30,11 @@ int main()
     }
     cin >> a >> b;
     // call function
-    reverse(v, a, b);
+    remove_even(v, a, b);
     // display content of the vector
-    for (auto &x : v){
+    for (auto &x : v)
+    {
         cout << x << " ";
-        }
+    }
     cout << endl;
-} // g++ reverse-vector-1.cpp -o reverse-vector-1
+}
