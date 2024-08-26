@@ -7,7 +7,7 @@ int main()
 {
     int n;
     map<int, int> mp_amount;
-    bool isNo;
+    bool isNo = false;
     cin >> n;
     for (size_t i = 1; i <= n; i++)
     {
@@ -24,7 +24,8 @@ int main()
         }
 
         // out of range
-        if (!(0 < d <= n))
+        // cout << "n: " << n << " d: " << d << " isNo: " << (d >= 1 && d<=n) << endl;
+        if (!(d >= 1 && d<=n))
         {
             isNo = true;
             break;

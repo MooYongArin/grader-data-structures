@@ -27,7 +27,7 @@ int main()
     }
 
     vector<int> all_amount;
-    bool isSkip;
+    bool isSkip = false;
     for (auto item : mp)
     {
         // cout << item.first << " " << item.second << endl;
