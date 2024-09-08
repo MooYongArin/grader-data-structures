@@ -1,59 +1,41 @@
-#include <iostream>
-#include <vector>
-#include <set>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
-
+map<int, int> mapp;
 int main()
 {
-    std::ios_base::sync_with_stdio(false); std::cin.tie(0);
-    int n, m;
-    cin >> n >> m;
-    vector<int> power_to(n);
-    for (size_t i = 0; i < n; i++)
+    int n, m, k, num, ch = 0, ans = 0;
+    scanf("%d %d", &n, &m);
+    for (int i = 0; i < n; i++)
     {
-        cin >> power_to[i];
+        scanf("%d", &num);
+        mapp[num]++;
     }
-    int round = 0;
-    int win = 0;
-    sort(power_to.begin(), power_to.end());
-    for (size_t i = 0; i < m; i++)
+    for (int i = 1; i <= m; i++)
     {
-        round++;
-        bool isLose = false;
-        int amount;
-        cin >> amount;
-        for (size_t i = 0; i < amount; i++)
+        scanf("%d", &k);
+        for (int j = 0; j < k; j++)
         {
-            int power;
-            cin >> power;
-            if (lower_bound(power_to.begin(), power_to.end(), power + 1) == power_to.end())
+            scanf("%d", &num);
+            if (ch)
+                continue;
+            auto it = mapp.upper_bound(num);
+            if (it == mapp.end())
             {
-                isLose = true;
-                break;
+                ch = 1;
+                ans = i;
             }
-            
-            if (*(lower_bound(power_to.begin(), power_to.end(), power + 1)) > power)
+            else
             {
-
-                power_to.erase(lower_bound(power_to.begin(), power_to.end(), power + 1));
-                if (i == amount-1)
-                {
-                    win++;
-                }
-                
+                int idx = it->first;
+                mapp[idx]--;
+                if (!mapp[idx])
+                    mapp.erase(idx);
             }
         }
-        if (isLose)
-        {
-            break;
-        }
     }
-    if (win == m)
-    {
-        round++;
-    }
-
-    cout << round;
+    if (ch)
+        printf("%d\n", ans);
+    else
+        printf("%d\n", m + 1);
+    return 0;
 }
