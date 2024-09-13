@@ -5,12 +5,6 @@ using namespace std;
 void member_multiply(vector<int> &v, vector<pair<vector<int>::iterator, int>> &multiply)
 {
     // write your code here
-    int reserve = v.size();
-    for (const auto &p : multiply)
-    {
-        reserve += p.second;
-    }
-
     vector<int> result;
     int current_index = 0;
 
