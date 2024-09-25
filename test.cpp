@@ -11,9 +11,9 @@ using namespace std;
 int main()
 {
     std::ios_base::sync_with_stdio(false); std::cin.tie(0); 
-    vector<int> v;
+    vector<string[2]> v;
     set<int> s;
-    map<int, int> mp;
+    map<int, string[3]> mp;
     queue<int> q;
     priority_queue<int> pq;
     stack<vector<int>> s1;
@@ -23,6 +23,7 @@ int main()
     s1.push({1});
     s2.push({1,3});
     s2.push({1,2});
+    
     s2.push({3});
     cout << (s1 < s2) << endl;
 }

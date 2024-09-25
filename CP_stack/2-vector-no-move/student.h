@@ -17,6 +17,7 @@ T &CP::vector_no_move<T>::operator[](int idx)
   }
 
   return mData[first_index][second_idx];
+
 }
 
 template <typename T>
