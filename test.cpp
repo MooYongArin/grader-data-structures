@@ -18,12 +18,6 @@ int main()
     priority_queue<int> pq;
     stack<vector<int>> s1;
     stack<vector<int>> s2;
-    s1.push({1,3});
-    s1.push({1,2});
-    s1.push({1});
-    s2.push({1,3});
-    s2.push({1,2});
     
-    s2.push({3});
-    cout << (s1 < s2) << endl;
+    cout << "Test" << endl;
 }
