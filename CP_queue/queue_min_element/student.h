@@ -18,14 +18,14 @@ T CP::queue<T>::min_element(std::vector<size_t> pos, Comp comp) const
     {
       if (!found)
       {
-        min = mData[i];
+        min = mData[(mFront + i) % mCap];
         found = true;
       }
       else
       {
-        if (comp(mData[i], min))
+        if (comp(mData[(mFront + i) % mCap], min))
         {
-          min = mData[i];
+          min = mData[(mFront + i) % mCap];
         }
       }
     }
