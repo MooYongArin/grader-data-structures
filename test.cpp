@@ -1,23 +1,10 @@
 #include <iostream>
-#include <vector>
-#include <set>
 #include <map>
-#include <algorithm>
-#include <queue>
-#include <stack>
 
 using namespace std;
-
 int main()
 {
-    std::ios_base::sync_with_stdio(false); std::cin.tie(0); 
-    vector<string[2]> v;
-    set<int> s;
-    map<int, string[3]> mp;
-    queue<int> q;
-    priority_queue<int> pq;
-    stack<vector<int>> s1;
-    stack<vector<int>> s2;
-    
-    cout << "Test" << endl;
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(0);
+    std::cout << "test";
 }
