@@ -32,9 +32,10 @@ int CP::priority_queue<T, Comp>::find_level(T k) const
     if (mData[i] == k)
     {
       int count = 0;
-      std::cout << i;
-      while (i != 1)
+      // std::cout << i;
+      while (i != 0)
       {
+        i--;
         i /= 2;
         count++;
       }
