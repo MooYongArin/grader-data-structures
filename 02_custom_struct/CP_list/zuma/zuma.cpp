@@ -1,20 +1,68 @@
-#include <iostream>
 #include <list>
-#include <algorithm>
+#include <iostream>
+#include <vector>
+
+//you can do anything........
 
 using namespace std;
 
-int main()
+int  checkzuma(list<int> &l,list<int>::iterator &it,int v)
 {
-    std::ios_base::sync_with_stdio(false); 
-    std::cin.tie(0); 
-    int n, k, v;
-    list<int> l;
-    cin >> n >> k >> v;
-    for (size_t i = 0; i < n; i++)
-    {
-        /* code */
-    }
-    
-    return 0;
+   auto itback = it;
+   int j = 0;
+   while(itback!=l.end()&&*itback == v){
+       j++;
+       itback--;
+   }
+   auto itfor = it;
+   itfor++;
+   while(itfor!=l.end()&&*itfor == v){
+       j++;
+       itfor++;
+   }
+   if(j>=3){
+         itback++;
+         it = l.erase(itback,itfor);
+         return 1;
+
+   }
+   return 0;
 }
+
+int main() {
+  int n,k,v;
+  list<int> l;
+
+  //read input
+  cin >> n >> k >> v;
+  while(n--) {
+    int a;
+    cin >> a;
+    l.push_back(a);
+  }
+
+  auto it = l.begin();
+  for(int i = 0; i< k;i++)
+      it++;
+   //cout << *(l.insert(it,v)) <<"XXX";
+   it = l.insert(it,v);
+
+
+   int c = checkzuma(l,it,v);
+   while(c)
+   {
+        it--;
+        if(it != l.end())
+             c = checkzuma(l,it,*it);
+         else c = 0;
+   }
+
+
+  //output
+  for (auto &x : l) {
+    cout << x << " ";
+  }
+  cout << endl;
+
+}
+
