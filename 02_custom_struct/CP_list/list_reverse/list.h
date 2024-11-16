@@ -11,6 +11,7 @@ template <typename T>
 class list
 {
   protected:
+
     class node {
       friend class list;
       public:
@@ -70,7 +71,6 @@ class list
     node *mHeader; // pointer to a header node
     size_t mSize;
 
-
   public:
     //-------------- constructor & copy operator ----------
 
@@ -83,8 +83,8 @@ class list
     }
 
     // default constructor
-    list() :
-      mHeader( new node() ), mSize( 0 ) { }
+    list() : mHeader( new node() ), mSize( 0 ) {
+    }
 
     // copy assignment operator using copy-and-swap idiom
     list<T>& operator=(list<T> other) {
@@ -163,15 +163,24 @@ class list
     }
 
     void print() {
-      std::cout << " Header address = " << (mHeader) << std::endl;
+      std::cout << "Size = " << mSize << std::endl;
       int i = 0;
       iterator before;
+      std::cout << "From FRONT to BACK: ";
       for (iterator it = begin();it!=end();before = it, it++,i++) {
-        std::cout << "Node " << i << ": " << *it;
-        std::cout << " (prev = " << it.ptr->prev << ", I'm at " << it.ptr << ", next = " << it.ptr->next << ")" <<  std:: endl;
+        std::cout << *it << " ";
       }
+      std::cout << std::endl << "From BACK to FRONT: ";
+      auto it = end();
+      while (it != begin()) {
+        --it;
+        std::cout << *it << " ";
+      }
+      std::cout << std::endl;
     }
-    #include "student.h"
+
+    iterator reverse(iterator a,iterator b);
+
 };
 
 }
