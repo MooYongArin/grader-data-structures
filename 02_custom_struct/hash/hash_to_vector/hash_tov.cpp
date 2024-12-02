@@ -7,6 +7,13 @@ using namespace std;
 void hash_to_vector(unordered_map<int, string> hash, vector<int> &key, vector<string> &value)
 {
     // write your code only here
+    auto it = hash.begin();
+    while (it != hash.end())
+    {
+        key.push_back(it->first);
+        value.push_back(it->second);
+        ++it;
+    }
     
 }
 
