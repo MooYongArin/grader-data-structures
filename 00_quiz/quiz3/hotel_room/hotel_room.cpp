@@ -1,100 +1,62 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <map>
+#include <queue>
+#include <vector>
+#include <set>
 
 using namespace std;
 
-int main(){
-    ios_base::sync_with_stdio(false); 
-    cin.tie(0); 
-    int n, m, all_reserve = 0;
-    map<int, int> mp;
+int main() {
+    int n, m;
     cin >> n >> m;
 
-    vector<int> reserve(n + 1);
-    for (size_t i = 1; i <= n; i++)
-    {
-        int r;
-        cin >> r;
-        reserve[i] = r;
-        mp[r] = i;
-        all_reserve += r;
+    map<int, priority_queue<int>> room;
+    int c;
+    int all = 0;
+
+    // Input room data
+    for (int i = 1; i <= n; i++) {
+        cin >> c;
+        room[c].push(i);
+        all += c;
     }
-    while (m--)
-    {
-        int amount;
-        bool isFound = false;
-        vector<pair<int, int>> to_print;
-        cin >> amount;
-        if (amount > all_reserve)
-        {
-            cout << -1 << "\n";
+
+    // Process each query
+    while (m--) {
+        cin >> c;
+
+        if (c > all) {
+            cout << "-1\n";
             continue;
         }
 
-        for (size_t i = reserve.size() - 1; i > 0; i--)
-        {
-            if (amount <= reserve[i])
-            {
-                reserve[i] -= amount;
-                all_reserve -= amount;
-                to_print.push_back({i, amount});
-                isFound = true;
-                break;
-            }
-        }
-int max = reserve[1], pos_max = 1;
-        while (!isFound)
-        {
+        all -= c;
 
-            for (size_t i = reserve.size() - 1; i > 0; i--)
-            {
-                if (reserve[i] > max)
-                {
-                    max = reserve[i];
-                    pos_max = i;
-                }
-            }
-            to_print.push_back({pos_max, reserve[pos_max]});
-            all_reserve -= reserve[pos_max];
-            reserve[pos_max] = 0;
+        set<pair<int,int>> sr;
+        while (c > 0) {
+            auto it = room.lower_bound(c);
 
-            for (size_t i = reserve.size() - 1; i > 0; i--)
-            {
-            if (amount <= reserve[i])
-                {
-                reserve[i] -= amount;
-                all_reserve -= amount;
-                to_print.push_back({i, amount});
-                isFound = true;
-                break;
-                }
-            }
-        }
-        
-        
+            if (it == room.end()) it--;
 
-        sort(to_print.begin(), to_print.end());
-        for (auto &i : to_print)
-        {
-            cout << i.first << " " << i.second << " ";
+            int room_num = it->first;
+            int floor = room[room_num].top();
+            room[room_num].pop();
+
+            if (room[room_num].empty()) room.erase(room_num);
+                
+            int d = min(room_num,c);
+            room_num -= d;
+            c -= d;
+            if (room_num != 0) room[room_num].push(floor) ;
+            sr.insert({floor, d});
+
+        // Output results for this query
+        for (auto x: sr) {
+          cout << x.first << " " << x.second << " ";
         }
         cout << "\n";
     }
-    
+
+    return 0;
 }
 
-// auto it = mp.upper_bound(amount);
-        // while (it == mp.end())
-        // {
-        //     it--;
-        //     to_print.push_back({it->second, it->first});
-        //     amount -= it->first;
-        //     mp.erase(it);
-        //     it = mp.upper_bound(amount);
-        // }
-
-        // to_print.push_back({it->second, it->first});
-        // amount -= it->first;
-        // it->first -= amount;
